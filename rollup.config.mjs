@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import scss from 'rollup-plugin-scss';
 import copy from 'rollup-plugin-copy';
+import json from '@rollup/plugin-json';
 
 import fs from 'node:fs'
 
@@ -29,7 +30,8 @@ const config = {
       targets: [
         { src: 'public/index.html', dest: 'docs' },
       ]
-    })
+    }),
+    json()
   ],
 };
 
