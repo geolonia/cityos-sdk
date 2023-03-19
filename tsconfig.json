@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "docs",
+    "sourceMap": true,
+    "inlineSources": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "downlevelIteration": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "docs",
+    "./node_modules/"
+  ]
+}
