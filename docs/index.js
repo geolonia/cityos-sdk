@@ -8093,16 +8093,17 @@
 	        };
 	        super(Object.assign(Object.assign({}, defaults), params));
 	    }
-	    loadData(className) {
+	    loadData(className, paint, layout) {
+	        const paintDefault = {
+	            'fill-color': '#FF0000',
+	            'fill-opacity': 0.2
+	        };
 	        this.addLayer({
 	            id: className,
 	            type: 'fill',
 	            source: 'takamatsu',
 	            'source-layer': 'main',
-	            paint: {
-	                'fill-color': '#FF0000',
-	                'fill-opacity': 0.2
-	            },
+	            paint: Object.assign(Object.assign({}, paintDefault), paint),
 	            "filter": [
 	                "all",
 	                [
@@ -8111,7 +8112,7 @@
 	                    className
 	                ],
 	            ],
-	        });
+	        }, 'poi');
 	    }
 	}
 	window.city = {};

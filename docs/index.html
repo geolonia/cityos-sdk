@@ -21,7 +21,11 @@
     const myCity = new city.Takamatsu.Map();
 
     myCity.on('load', () => {
-      myCity.loadData('商業地域')
+      myCity.loadData('商業地域', {
+        'fill-color': '#FFFF00',
+      })
+      myCity.loadData('第一種低層住居専用地域')
+      myCity.loadData('第二種低層住居専用地域')
     })
   </script>
 </body>

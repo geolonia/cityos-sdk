@@ -21,16 +21,18 @@ class TakamatsuMap extends maplibregl.Map {
     super({...defaults, ...params});
   }
 
-  loadData(className: string) {
+  loadData(className: string, paint: any | undefined | null, layout: any | undefined | null) {
+    const paintDefault = {
+      'fill-color': '#FF0000',
+      'fill-opacity': 0.2
+    }
+
     this.addLayer({
       id: className,
       type: 'fill',
       source: 'takamatsu',
       'source-layer': 'main',
-      paint: {
-        'fill-color': '#FF0000',
-        'fill-opacity': 0.2
-      },
+      paint: {...paintDefault, ...paint},
       "filter": [
         "all",
         [
@@ -39,7 +41,7 @@ class TakamatsuMap extends maplibregl.Map {
           className
         ],
       ],
-    });
+    }, 'poi');
   }
 }
 
