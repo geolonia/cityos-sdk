@@ -3,11 +3,11 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 declare global {
   interface Window {
-      Takamatsu: any;
+      city: any;
   }
 }
 
-class CityMap extends maplibregl.Map {
+class TakamatsuMap extends maplibregl.Map {
   constructor(params: any) {
     const defaults = {
       container: 'map',
@@ -20,5 +20,5 @@ class CityMap extends maplibregl.Map {
   }
 }
 
-window.Takamatsu = maplibregl
-window.Takamatsu.Map = CityMap
+window.city.Takamatsu = maplibregl
+window.city.Takamatsu.Map = TakamatsuMap

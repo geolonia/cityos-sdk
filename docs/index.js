@@ -56,7 +56,7 @@
 		
 	} (maplibreGl));
 
-	class CityMap extends maplibreGlExports.Map {
+	class TakamatsuMap extends maplibreGlExports.Map {
 	    constructor(params) {
 	        const defaults = {
 	            container: 'map',
@@ -67,8 +67,8 @@
 	        super(Object.assign(Object.assign({}, defaults), params));
 	    }
 	}
-	window.Takamatsu = maplibreGlExports;
-	window.Takamatsu.Map = CityMap;
+	window.city.Takamatsu = maplibreGlExports;
+	window.city.Takamatsu.Map = TakamatsuMap;
 
 }));
 //# sourceMappingURL=index.js.map
