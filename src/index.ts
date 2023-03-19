@@ -20,6 +20,27 @@ class TakamatsuMap extends maplibregl.Map {
 
     super({...defaults, ...params});
   }
+
+  loadData(className: string) {
+    this.addLayer({
+      id: className,
+      type: 'fill',
+      source: 'takamatsu',
+      'source-layer': 'main',
+      paint: {
+        'fill-color': '#FF0000',
+        'fill-opacity': 0.2
+      },
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          className
+        ],
+      ],
+    });
+  }
 }
 
 window.city = {}

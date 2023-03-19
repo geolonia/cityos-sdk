@@ -68,9 +68,17 @@
 			url: "https://tileserver.geolonia.com/gsi_experimental_bvmap/tiles.json?key=YOUR-API-KEY",
 			minzoom: 5
 		},
+		"geolonia-water": {
+			type: "vector",
+			url: "https://tileserver.geolonia.com/water/tiles.json?key=YOUR-API-KEY"
+		},
 		"geolonia-gsi-custom": {
 			type: "vector",
 			url: "https://tileserver.geolonia.com/gsi-extra-v2/tiles.json?key=YOUR-API-KEY"
+		},
+		takamatsu: {
+			type: "vector",
+			url: "https://tileserver.geolonia.com/takamatsu_main_v0/tiles.json?key=YOUR-API-KEY"
 		}
 	};
 	var sprite = "https://geoloniamaps.github.io/gsi/gsi";
@@ -219,6 +227,63 @@
 			paint: {
 				"fill-color": "#d8e8c8",
 				"fill-opacity": 0.8
+			}
+		},
+		{
+			id: "geolonia-water-ocean",
+			type: "fill",
+			source: "geolonia-water",
+			"source-layer": "water",
+			layout: {
+				visibility: "visible"
+			},
+			paint: {
+				"fill-color": "#65cbf9"
+			}
+		},
+		{
+			id: "water-blur",
+			type: "line",
+			source: "geolonia-water",
+			"source-layer": "water",
+			minzoom: 17,
+			layout: {
+				"line-join": "round",
+				visibility: "visible"
+			},
+			paint: {
+				"line-color": "#62cffc",
+				"line-width": {
+					stops: [
+						[
+							17,
+							3
+						],
+						[
+							20,
+							5
+						]
+					]
+				},
+				"line-translate": {
+					stops: [
+						[
+							17,
+							[
+								1,
+								1
+							]
+						],
+						[
+							20,
+							[
+								-2,
+								-2
+							]
+						]
+					]
+				},
+				"line-blur": 2
 			}
 		},
 		{
@@ -8027,6 +8092,26 @@
 	            zoom: 12
 	        };
 	        super(Object.assign(Object.assign({}, defaults), params));
+	    }
+	    loadData(className) {
+	        this.addLayer({
+	            id: className,
+	            type: 'fill',
+	            source: 'takamatsu',
+	            'source-layer': 'main',
+	            paint: {
+	                'fill-color': '#FF0000',
+	                'fill-opacity': 0.2
+	            },
+	            "filter": [
+	                "all",
+	                [
+	                    "==",
+	                    "class",
+	                    className
+	                ],
+	            ],
+	        });
 	    }
 	}
 	window.city = {};

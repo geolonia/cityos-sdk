@@ -19,6 +19,10 @@
   <script src="./index.js"></script>
   <script type="application/javascript">
     const myCity = new city.Takamatsu.Map();
+
+    myCity.on('load', () => {
+      myCity.loadData('商業地域')
+    })
   </script>
 </body>
 </html>
