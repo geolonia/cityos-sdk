@@ -67,6 +67,7 @@
 	        super(Object.assign(Object.assign({}, defaults), params));
 	    }
 	}
+	window.city = {};
 	window.city.Takamatsu = maplibreGlExports;
 	window.city.Takamatsu.Map = TakamatsuMap;
 

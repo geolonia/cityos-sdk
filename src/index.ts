@@ -20,5 +20,6 @@ class TakamatsuMap extends maplibregl.Map {
   }
 }
 
+window.city = {}
 window.city.Takamatsu = maplibregl
 window.city.Takamatsu.Map = TakamatsuMap
