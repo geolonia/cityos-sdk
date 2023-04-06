@@ -25,6 +25,9 @@ jobs:
   deploy-s3:
     if: github.ref == 'refs/heads/main'
 
+    needs:
+      - build
+
     runs-on: ubuntu-latest
 
     # Allow write on id-token so we can use it to authenticate to AWS
