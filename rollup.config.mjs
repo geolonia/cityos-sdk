@@ -31,7 +31,7 @@ const config = {
         { src: 'public/index.html', dest: 'docs' },
       ]
     }),
-    json()
+    json(),
   ],
 };
 
