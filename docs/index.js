@@ -10084,7 +10084,7 @@
                     type: 'circle',
                     source: url,
                     paint: {
-                        'circle-radius': 5,
+                        'circle-radius': 9,
                         'circle-color': '#FF0000',
                         'circle-opacity': 0.5,
                     }
