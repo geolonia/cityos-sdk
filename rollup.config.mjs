@@ -25,7 +25,10 @@ const config = {
       requireReturnsDefault: "auto",
     }),
     typescript(),
-    scss(),
+    scss({
+      output: false,
+      insert: true,
+    }),
     copy({
       targets: [
         { src: 'public/index.html', dest: 'docs' },
