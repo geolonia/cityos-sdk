@@ -111,3 +111,5 @@ class TakamatsuMap extends maplibregl.Map {
 window.city = {}
 window.city.Takamatsu = maplibregl
 window.city.Takamatsu.Map = TakamatsuMap
+window.city.Takamatsu.Popup = maplibregl.Popup;
+

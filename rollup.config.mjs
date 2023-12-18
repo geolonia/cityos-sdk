@@ -4,7 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import scss from 'rollup-plugin-scss';
 import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
-
+import postcss from 'rollup-plugin-postcss';
 import fs from 'node:fs'
 
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
@@ -25,7 +25,10 @@ const config = {
       requireReturnsDefault: "auto",
     }),
     typescript(),
-    scss(),
+    postcss({
+      inject: true,
+      sourceMap: true,
+    }),
     copy({
       targets: [
         { src: 'public/index.html', dest: 'docs' },
