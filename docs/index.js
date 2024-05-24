@@ -10077,7 +10077,7 @@
                 center: [134.04654783784918, 34.34283588989655],
                 zoom: 12,
                 transformRequest: (url, resourceType) => {
-                    const apiKey = parseApiKey(); // APIキーの取得などの処理を行う
+                    const apiKey = parseApiKey();
                     if (!apiKey) {
                         return { url };
                     }
