@@ -1,6 +1,7 @@
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import Papa from 'papaparse';
+import { parseApiKey } from './utils';
 
 import style from './style.json'
 
@@ -16,7 +17,21 @@ class TakamatsuMap extends maplibregl.Map {
       container: 'map',
       style: style,
       center: [134.04654783784918, 34.34283588989655],
-      zoom: 12
+      zoom: 12,
+      transformRequest: (url: string, resourceType: string) => {
+        const apiKey = parseApiKey(); // APIキーの取得などの処理を行う
+
+        if (!apiKey) {
+          return { url };
+        }
+
+        if ((resourceType === 'Tile') && url.startsWith('https://tileserver.geolonia.com')) {
+          const updatedUrl = url.replace('YOUR-API-KEY', apiKey);
+
+          return { url: updatedUrl };
+        }
+        return { url };
+      }
     }
 
     super({...defaults, ...params});
