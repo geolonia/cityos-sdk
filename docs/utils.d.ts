@@ -1,6 +1,6 @@
 /**
  * Parses the API key from the URL of the current script tag.
  *
- * @param {Document} document
+ * @param {HTMLScriptElement} script - The current script tag.
  */
-export declare const parseApiKey: (doc?: Document) => string;
+export declare const parseApiKey: (script: HTMLScriptElement) => string;

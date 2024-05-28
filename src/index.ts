@@ -12,14 +12,18 @@ declare global {
 }
 
 class TakamatsuMap extends maplibregl.Map {
+
+  static currentScript: HTMLScriptElement | null = null;
+
   constructor(params: any) {
+
     const defaults = {
       container: 'map',
       style: style,
       center: [134.04654783784918, 34.34283588989655],
       zoom: 12,
       transformRequest: (url: string, resourceType: string) => {
-        const apiKey = parseApiKey();
+        const apiKey = parseApiKey(TakamatsuMap.currentScript);
 
         if (!apiKey) {
           return { url };
@@ -122,6 +126,8 @@ class TakamatsuMap extends maplibregl.Map {
     })
   }
 }
+
+TakamatsuMap.currentScript = document.currentScript as HTMLScriptElement;
 
 window.city = {}
 window.city.Takamatsu = maplibregl

@@ -2021,23 +2021,16 @@
     /**
      * Parses the API key from the URL of the current script tag.
      *
-     * @param {Document} document
+     * @param {HTMLScriptElement} script - The current script tag.
      */
-    const parseApiKey = (doc = document) => {
-        const scripts = doc.currentScript ?
-            [doc.currentScript]
-            :
-                doc.getElementsByTagName('script');
+    const parseApiKey = (script) => {
         let apiKey = null;
-        for (const script of scripts) {
-            const url = new URL((script.src.startsWith('https://') ||
-                script.src.startsWith('http://') ||
-                script.src.startsWith('//')) ? script.src : `https://${location.host}/${script.src}`);
-            const _apiKey = url.searchParams.get('api-key');
-            if (_apiKey) {
-                apiKey = _apiKey;
-                break;
-            }
+        const url = new URL((script.src.startsWith('https://') ||
+            script.src.startsWith('http://') ||
+            script.src.startsWith('//')) ? script.src : `https://${location.host}/${script.src}`);
+        const _apiKey = url.searchParams.get('api-key');
+        if (_apiKey) {
+            apiKey = _apiKey;
         }
         return apiKey;
     };
@@ -10077,7 +10070,7 @@
                 center: [134.04654783784918, 34.34283588989655],
                 zoom: 12,
                 transformRequest: (url, resourceType) => {
-                    const apiKey = parseApiKey();
+                    const apiKey = parseApiKey(TakamatsuMap.currentScript);
                     if (!apiKey) {
                         return { url };
                     }
@@ -10170,6 +10163,8 @@
             });
         }
     }
+    TakamatsuMap.currentScript = null;
+    TakamatsuMap.currentScript = document.currentScript;
     window.city = {};
     window.city.Takamatsu = maplibregl;
     window.city.Takamatsu.Map = TakamatsuMap;
