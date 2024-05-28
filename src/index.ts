@@ -23,14 +23,13 @@ class TakamatsuMap extends maplibregl.Map {
       center: [134.04654783784918, 34.34283588989655],
       zoom: 12,
       transformRequest: (url: string, resourceType: string) => {
-        const apiKey = parseApiKey(TakamatsuMap.currentScript);
 
-        if (!apiKey) {
+        if (!window.city.apiKey) {
           return { url };
         }
 
         if ((resourceType === 'Tile') && url.startsWith('https://tileserver.geolonia.com')) {
-          const updatedUrl = url.replace('YOUR-API-KEY', apiKey);
+          const updatedUrl = url.replace('YOUR-API-KEY', window.city.apiKey);
 
           return { url: updatedUrl };
         }
@@ -127,9 +126,10 @@ class TakamatsuMap extends maplibregl.Map {
   }
 }
 
-TakamatsuMap.currentScript = document.currentScript as HTMLScriptElement;
+const currentScript = document.currentScript as HTMLScriptElement;
 
 window.city = {}
+window.city.apiKey = parseApiKey(currentScript);
 window.city.Takamatsu = maplibregl
 window.city.Takamatsu.Map = TakamatsuMap
 window.city.Takamatsu.Popup = maplibregl.Popup;
