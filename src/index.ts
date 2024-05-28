@@ -13,8 +13,6 @@ declare global {
 
 class TakamatsuMap extends maplibregl.Map {
 
-  static currentScript: HTMLScriptElement | null = null;
-
   constructor(params: any) {
 
     const defaults = {
