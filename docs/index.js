@@ -2018,6 +2018,23 @@
     var papaparseExports = papaparse.exports;
     var Papa = /*@__PURE__*/getDefaultExportFromCjs(papaparseExports);
 
+    /**
+     * Parses the API key from the URL of the current script tag.
+     *
+     * @param {HTMLScriptElement} script - The current script tag.
+     */
+    const parseApiKey = (script) => {
+        let apiKey = null;
+        const url = new URL((script.src.startsWith('https://') ||
+            script.src.startsWith('http://') ||
+            script.src.startsWith('//')) ? script.src : `https://${location.host}/${script.src}`);
+        const _apiKey = url.searchParams.get('api-key');
+        if (_apiKey) {
+            apiKey = _apiKey;
+        }
+        return apiKey;
+    };
+
     var version = 8;
     var name = "GSI Japan + OpenStreetMap based style for Geolonia";
     var sources = {
@@ -10051,7 +10068,17 @@
                 container: 'map',
                 style: style,
                 center: [134.04654783784918, 34.34283588989655],
-                zoom: 12
+                zoom: 12,
+                transformRequest: (url, resourceType) => {
+                    if (!window.city.apiKey) {
+                        return { url };
+                    }
+                    if ((resourceType === 'Tile') && url.startsWith('https://tileserver.geolonia.com')) {
+                        const updatedUrl = url.replace('YOUR-API-KEY', window.city.apiKey);
+                        return { url: updatedUrl };
+                    }
+                    return { url };
+                }
             };
             super(Object.assign(Object.assign({}, defaults), params));
         }
@@ -10135,7 +10162,10 @@
             });
         }
     }
+    TakamatsuMap.currentScript = null;
+    const currentScript = document.currentScript;
     window.city = {};
+    window.city.apiKey = parseApiKey(currentScript);
     window.city.Takamatsu = maplibregl;
     window.city.Takamatsu.Map = TakamatsuMap;
     window.city.Takamatsu.Popup = maplibregl.Popup;
