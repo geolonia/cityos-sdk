@@ -26,7 +26,7 @@ class TakamatsuMap extends maplibregl.Map {
           return { url };
         }
 
-        if ((resourceType === 'Tile') && url.startsWith('https://tileserver.geolonia.com')) {
+        if ((resourceType === 'Tile' || resourceType === 'Source') && url.startsWith('https://tileserver.geolonia.com')) {
           const updatedUrl = url.replace('YOUR-API-KEY', window.city.apiKey);
 
           return { url: updatedUrl };
